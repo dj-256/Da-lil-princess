@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: 09994cdaea1873143b5931d804f0c1ab
+  - enabled: 1
+    path: Assets/Scenes/FrenchFoodScene.unity
+    guid: f711aeb305dc69549beae90bfbb13f88
   m_configObjects: {}
