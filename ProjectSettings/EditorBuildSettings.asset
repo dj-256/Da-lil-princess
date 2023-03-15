@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FrenchFoodScene.unity
     guid: f711aeb305dc69549beae90bfbb13f88
+  - enabled: 1
+    path: Assets/Scenes/FormsMotionsScene.unity
+    guid: 1ecf31cf361b9c54aad454df94f5572a
   m_configObjects: {}
