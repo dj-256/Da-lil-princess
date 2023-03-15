@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FormsMotionsScene.unity
     guid: 1ecf31cf361b9c54aad454df94f5572a
+  - enabled: 1
+    path: Assets/Scenes/CompetitionScene.unity
+    guid: 0840db30b3971e541b9ccfe0cd7d5373
   m_configObjects: {}
