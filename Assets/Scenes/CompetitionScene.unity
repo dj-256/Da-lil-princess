@@ -699,6 +699,10 @@ PrefabInstance:
       propertyPath: backwardMoveSpeed
       value: -60
       objectReference: {fileID: 0}
+    - target: {fileID: 5321184390537694922, guid: 3e091cdcdbbc1474aa1e59b31715330b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5321184390537694924, guid: 3e091cdcdbbc1474aa1e59b31715330b, type: 3}
       propertyPath: m_RootOrder
       value: 4
