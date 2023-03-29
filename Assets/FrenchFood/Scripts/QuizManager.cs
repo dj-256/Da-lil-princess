@@ -66,7 +66,7 @@ public class QuizManager : MonoBehaviour
         GUIStyle titleStyle = new GUIStyle(GUI.skin.label);
         titleStyle.fontSize = 36;
         titleStyle.alignment = TextAnchor.UpperCenter;
-        GUILayout.BeginArea(new Rect(0, 10, Screen.width, 100));
+        GUILayout.BeginArea(new Rect(0, 60, Screen.width, 100));
         GUILayout.Label("QUIZ", titleStyle);
         GUILayout.EndArea();
     }
@@ -141,11 +141,12 @@ public class QuizManager : MonoBehaviour
     }
 
     private void DisplayQuizResults()
-    {
-		Debug.Log("display results");
-        //GUILayout.BeginArea(new Rect((Screen.width - 300) / 2, (Screen.height - 200) / 2, 300, 200));
-        //GUILayout.Label("Quiz Finished!");
-        //GUILayout.Label("Your score: " + score + "/" + questions.Count);
-        //GUILayout.EndArea();
-    }
+	{
+    	GUIStyle resultsStyle = new GUIStyle(GUI.skin.label);
+    	resultsStyle.fontSize = 24;
+    	resultsStyle.alignment = TextAnchor.MiddleCenter;
+
+    	Rect resultsRect = new Rect((Screen.width - 300) / 2, (Screen.height - 200) / 2, 300, 200);
+    	GUI.Label(resultsRect, "Quiz Finished!\nYour score: " + score + "/" + questions.Count, resultsStyle);
+	}
 }
