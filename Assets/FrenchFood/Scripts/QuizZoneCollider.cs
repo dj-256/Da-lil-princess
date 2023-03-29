@@ -20,6 +20,7 @@ public class QuizZoneCollider : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInside = false;
+			quizManager.ExitQuiz();
         }
     }
 
@@ -27,7 +28,7 @@ public class QuizZoneCollider : MonoBehaviour
     {
         if (playerInside && Input.GetKeyDown(KeyCode.E))
         {
-            quizManager.ToggleQuiz();
+            quizManager.BeginQuiz();
         }
     }
 }

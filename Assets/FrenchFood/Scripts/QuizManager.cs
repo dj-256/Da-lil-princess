@@ -15,11 +15,33 @@ public class QuizManager : MonoBehaviour
     private int currentQuestionIndex = 0;
     private int score = 0;
     private bool quizFinished = false;
-	public bool quizActive = false;
+    private bool quizActive = false;
 
-	public void ToggleQuiz()
+	public void ExitQuiz()
+	{
+		currentQuestionIndex = 0;
+		score = 0;
+		quizFinished = false;
+		quizActive = false;
+	}
+
+	public void BeginQuiz()
+	{
+		quizActive = true;
+		quizFinished = false;
+	}
+
+    public void ToggleQuiz()
     {
         quizActive = !quizActive;
+    }
+
+    private void Update()
+    {
+        if (quizActive && !quizFinished)
+        {
+            CheckForKeyPress();
+        }
     }
 
     private void OnGUI()
@@ -37,40 +59,61 @@ public class QuizManager : MonoBehaviour
         }
     }
 
-    private void DisplayCurrentQuestion()
-{
-    if (currentQuestionIndex < questions.Count)
+    private void CheckForKeyPress()
     {
-        Question currentQuestion = questions[currentQuestionIndex];
+        int selectedIndex = -1;
 
-        GUILayout.BeginArea(new Rect((Screen.width - 300) / 2, (Screen.height - 200) / 2, 300, 200));
-        GUILayout.Label(currentQuestion.questionText);
+        if (Input.GetKeyDown(KeyCode.A)) selectedIndex = 0;
+        else if (Input.GetKeyDown(KeyCode.B)) selectedIndex = 1;
+        else if (Input.GetKeyDown(KeyCode.C)) selectedIndex = 2;
+        else if (Input.GetKeyDown(KeyCode.D)) selectedIndex = 3;
 
-        for (int i = 0; i < currentQuestion.answers.Length; i++)
+        if (selectedIndex >= 0)
         {
-            if (GUILayout.Button(currentQuestion.answers[i]))
-            {
-                if (i == currentQuestion.correctAnswerIndex)
-                {
-                    score++;
-                }
-
-                currentQuestionIndex++;
-            }
+            CheckAnswer(selectedIndex);
         }
-        GUILayout.EndArea();
     }
-    else
+
+    private void CheckAnswer(int selectedIndex)
     {
-        quizFinished = true;
+        if (selectedIndex == questions[currentQuestionIndex].correctAnswerIndex)
+        {
+            score++;
+        }
+        currentQuestionIndex++;
+
+        if (currentQuestionIndex >= questions.Count)
+        {
+            quizFinished = true;
+        }
     }
-}
+
+    private void DisplayCurrentQuestion()
+    {
+        if (currentQuestionIndex < questions.Count)
+        {
+            Question currentQuestion = questions[currentQuestionIndex];
+
+            GUILayout.BeginArea(new Rect((Screen.width - 300) / 2, (Screen.height - 200) / 2, 300, 200));
+            GUILayout.Label(currentQuestion.questionText);
+
+            for (int i = 0; i < currentQuestion.answers.Length; i++)
+            {
+                GUILayout.Label((char)('A' + i) + ". " + currentQuestion.answers[i]);
+            }
+            GUILayout.EndArea();
+        }
+        else
+        {
+            quizFinished = true;
+        }
+    }
 
     private void DisplayQuizResults()
-{
-    GUILayout.BeginArea(new Rect((Screen.width - 300) / 2, (Screen.height - 200) / 2, 300, 200));
-    GUILayout.Label("Quiz Finished!");
-    GUILayout.Label("Your score: " + score + "/" + questions.Count);
-    GUILayout.EndArea();
-}
+    {
+        GUILayout.BeginArea(new Rect((Screen.width - 300) / 2, (Screen.height - 200) / 2, 300, 200));
+        GUILayout.Label("Quiz Finished!");
+        GUILayout.Label("Your score: " + score + "/" + questions.Count);
+        GUILayout.EndArea();
+    }
 }
