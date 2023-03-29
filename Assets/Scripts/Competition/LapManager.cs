@@ -34,9 +34,6 @@ public class LapManager : MonoBehaviour
     private void ListenCheckpoints(bool subscribe)
     {
         foreach(Checkpoint checkpoint in checkpoints) {
-            //TODO : refactor onChekpointEnter event
-            //if(subscribe) checkpoint.onCheckpointEnter.AddListener(CheckpointActivated);
-            //else checkpoint.onCheckpointEnter.RemoveListener(CheckpointActivated);
             if(subscribe) checkpoint.onCheckpointEnter.AddListener((car, checkpoint) => CheckpointActivated(car.GetComponent<CarIdentity>(), checkpoint));
             else checkpoint.onCheckpointEnter.RemoveListener((car, checkpoint) => CheckpointActivated(car.GetComponent<CarIdentity>(), checkpoint));
         }
@@ -68,16 +65,12 @@ public class LapManager : MonoBehaviour
 
                     System.DateTime endTime = System.DateTime.Now;
                     System.TimeSpan timeSpan = endTime - startTime;
-                    //Debug.Log("Time: " + timeSpan.Seconds + "s " + timeSpan.Milliseconds + "ms");
-                    //Debug.Log("Score: " + score);
-                    //scoreboard.UpdateTimeText("Time: " + timeSpan.Seconds + "s " + timeSpan.Milliseconds + "ms");
+                    Debug.Log("Time: " + timeSpan.Seconds + "s " + timeSpan.Milliseconds + "ms");
+                    Debug.Log("Score: " + score);
 
                     // if first winner, display its name
                     if (player.rank == 1)
                     {
-
-                        // TODO : create attribute divername in CarIdentity 
-                        Debug.Log(player.identity.driverName + " won");
                         ui.UpdateWinnerText(player.identity.driverName + " won");
                     }
                     else if (player == mainPlayerRank) // display player rank if not winner
@@ -88,9 +81,6 @@ public class LapManager : MonoBehaviour
                     if (player == mainPlayerRank) onPlayerFinished.Invoke();
                 }
                 else {
-                    // TODO : create attribute divername in CarIdentity 
-                    //Debug.Log(player.identity.driverName + ": lap " + player.lapNumber);
-                    Debug.Log(car.gameObject.tag);
                     if (car.gameObject.tag == "Player") {
                         ui.UpdateLapText("Lap " + player.lapNumber + " / " + totalLaps);
                     }

@@ -6,9 +6,11 @@ using TMPro;
 public class ScoreboardManager : MonoBehaviour
 {
     public TextMeshProUGUI timeText;
+    public TextMeshProUGUI scoreText;
     // Start is called before the first frame update
     void Start()
     {
+        
         
     }
 
@@ -18,8 +20,4 @@ public class ScoreboardManager : MonoBehaviour
         
     }
 
-    public void UpdateTimeText(string message)
-    {
-        timeText.text = message;
-    }
 }
