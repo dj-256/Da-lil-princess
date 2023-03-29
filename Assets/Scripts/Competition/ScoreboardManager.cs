@@ -10,8 +10,8 @@ public class ScoreboardManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-        
+        scoreText.text = "You collected "+LapManager.score.ToString()+" coins";
+        timeText.text = "Your time was "+LapManager.finalTime;
     }
 
     // Update is called once per frame

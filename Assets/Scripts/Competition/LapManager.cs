@@ -10,7 +10,8 @@ public class LapManager : MonoBehaviour
     public UIManager ui;
     //public ScoreboardManager scoreboard;
     private System.DateTime startTime;
-    private int score = 0;
+    public static int score = 0;
+    public static string finalTime;
 
     private List<PlayerRank> playerRanks = new List<PlayerRank>();
     private PlayerRank mainPlayerRank;
@@ -65,6 +66,7 @@ public class LapManager : MonoBehaviour
 
                     System.DateTime endTime = System.DateTime.Now;
                     System.TimeSpan timeSpan = endTime - startTime;
+                    finalTime = timeSpan.Seconds + "s " + timeSpan.Milliseconds + "ms";
                     Debug.Log("Time: " + timeSpan.Seconds + "s " + timeSpan.Milliseconds + "ms");
                     Debug.Log("Score: " + score);
 
