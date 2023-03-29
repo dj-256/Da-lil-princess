@@ -48,6 +48,8 @@ public class QuizManager : MonoBehaviour
     {
         if (quizActive)
         {
+            DrawBackgroundOverlay();
+            DisplayQuizTitle();
             if (!quizFinished)
             {
                 DisplayCurrentQuestion();
@@ -58,6 +60,17 @@ public class QuizManager : MonoBehaviour
             }
         }
     }
+
+	private void DisplayQuizTitle()
+    {
+        GUIStyle titleStyle = new GUIStyle(GUI.skin.label);
+        titleStyle.fontSize = 36;
+        titleStyle.alignment = TextAnchor.UpperCenter;
+        GUILayout.BeginArea(new Rect(0, 10, Screen.width, 100));
+        GUILayout.Label("QUIZ", titleStyle);
+        GUILayout.EndArea();
+    }
+
 
     private void CheckForKeyPress()
     {
@@ -94,12 +107,20 @@ public class QuizManager : MonoBehaviour
         {
             Question currentQuestion = questions[currentQuestionIndex];
 
+            GUIStyle questionStyle = new GUIStyle(GUI.skin.label);
+            questionStyle.fontSize = 24;
+            questionStyle.alignment = TextAnchor.MiddleCenter;
+
+            GUIStyle answerStyle = new GUIStyle(GUI.skin.label);
+            answerStyle.fontSize = 20;
+            answerStyle.alignment = TextAnchor.MiddleLeft;
+
             GUILayout.BeginArea(new Rect((Screen.width - 300) / 2, (Screen.height - 200) / 2, 300, 200));
-            GUILayout.Label(currentQuestion.questionText);
+            GUILayout.Label(currentQuestion.questionText, questionStyle);
 
             for (int i = 0; i < currentQuestion.answers.Length; i++)
             {
-                GUILayout.Label((char)('A' + i) + ". " + currentQuestion.answers[i]);
+                GUILayout.Label((char)('A' + i) + ". " + currentQuestion.answers[i], answerStyle);
             }
             GUILayout.EndArea();
         }
@@ -109,11 +130,22 @@ public class QuizManager : MonoBehaviour
         }
     }
 
+	private void DrawBackgroundOverlay()
+    {
+        GUIStyle overlayStyle = new GUIStyle();
+        overlayStyle.normal.background = Texture2D.whiteTexture;
+        Color originalColor = GUI.color;
+        GUI.color = new Color(0, 0, 0, 0.5f);
+        GUI.Box(new Rect(0, 0, Screen.width, Screen.height), GUIContent.none, overlayStyle);
+        GUI.color = originalColor;
+    }
+
     private void DisplayQuizResults()
     {
-        GUILayout.BeginArea(new Rect((Screen.width - 300) / 2, (Screen.height - 200) / 2, 300, 200));
-        GUILayout.Label("Quiz Finished!");
-        GUILayout.Label("Your score: " + score + "/" + questions.Count);
-        GUILayout.EndArea();
+		Debug.Log("display results");
+        //GUILayout.BeginArea(new Rect((Screen.width - 300) / 2, (Screen.height - 200) / 2, 300, 200));
+        //GUILayout.Label("Quiz Finished!");
+        //GUILayout.Label("Your score: " + score + "/" + questions.Count);
+        //GUILayout.EndArea();
     }
 }

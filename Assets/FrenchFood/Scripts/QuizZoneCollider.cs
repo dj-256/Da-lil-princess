@@ -26,7 +26,7 @@ public class QuizZoneCollider : MonoBehaviour
 
     void Update()
     {
-        if (playerInside && Input.GetKeyDown(KeyCode.E))
+        if (playerInside)
         {
             quizManager.BeginQuiz();
         }
