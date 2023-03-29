@@ -5,8 +5,12 @@ using UnityEngine.Events;
 public class LapManager : MonoBehaviour
 {
     public List<Checkpoint> checkpoints;
+    public List<Coin> coins;
     public int totalLaps = 3;
     public UIManager ui;
+    //public ScoreboardManager scoreboard;
+    private System.DateTime startTime;
+    private int score = 0;
 
     private List<PlayerRank> playerRanks = new List<PlayerRank>();
     private PlayerRank mainPlayerRank;
@@ -20,8 +24,10 @@ public class LapManager : MonoBehaviour
             playerRanks.Add(new PlayerRank(carIdentity));
         }
         ListenCheckpoints(true);
+        ListenCoins(true);
         ui.UpdateLapText("Lap "+ playerRanks[0].lapNumber + " / " + totalLaps);
-        Debug.Log("Lap au début");
+        ui.UpdateScoreText("Score: " + score);
+        startTime = System.DateTime.Now;
         mainPlayerRank = playerRanks.Find(player => player.identity.gameObject.tag == "Player");
     }
 
@@ -60,23 +66,28 @@ public class LapManager : MonoBehaviour
                     // getting final rank, by finding number of finished players
                     player.rank = playerRanks.FindAll(player => player.hasFinished).Count;
 
+                    System.DateTime endTime = System.DateTime.Now;
+                    System.TimeSpan timeSpan = endTime - startTime;
+                    //Debug.Log("Time: " + timeSpan.Seconds + "s " + timeSpan.Milliseconds + "ms");
+                    //Debug.Log("Score: " + score);
+                    //scoreboard.UpdateTimeText("Time: " + timeSpan.Seconds + "s " + timeSpan.Milliseconds + "ms");
+
                     // if first winner, display its name
                     if (player.rank == 1)
                     {
 
                         // TODO : create attribute divername in CarIdentity 
-                        //Debug.Log(player.identity.driverName + " won");
-                        //ui.UpdateLapText(player.identity.driverName + " won");
+                        Debug.Log(player.identity.driverName + " won");
+                        ui.UpdateWinnerText(player.identity.driverName + " won");
                     }
                     else if (player == mainPlayerRank) // display player rank if not winner
                     {
-                        ui.UpdateLapText("\nYou finished in " + mainPlayerRank.rank + " place");
+                        ui.UpdateWinnerText("\nYou finished in " + mainPlayerRank.rank + " place");
                     }
 
                     if (player == mainPlayerRank) onPlayerFinished.Invoke();
                 }
                 else {
-                    Debug.Log("On est dans le else");
                     // TODO : create attribute divername in CarIdentity 
                     //Debug.Log(player.identity.driverName + ": lap " + player.lapNumber);
                     Debug.Log(car.gameObject.tag);
@@ -93,4 +104,23 @@ public class LapManager : MonoBehaviour
             }
         }
     }
+
+    private void ListenCoins(bool subscribe)
+    {
+        foreach(Coin coin in coins) {
+            if(subscribe) coin.onCoinEnter.AddListener((car, coin) => CoinActivated(car.GetComponent<CarIdentity>(), coin));
+            else coin.onCoinEnter.RemoveListener((car, coin) => CoinActivated(car.GetComponent<CarIdentity>(), coin));
+        }
+    }
+
+    public void CoinActivated(CarIdentity car, Coin coin)
+    {
+        PlayerRank player = playerRanks.Find((rank) => rank.identity == car);
+        if (coins.Contains(coin) && player.identity.driverName=="Princess") {
+            score += 1;
+            ui.UpdateScoreText("Score: " + score);
+        }
+    }
+    
+                        
 }
