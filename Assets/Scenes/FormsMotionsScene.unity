@@ -332,7 +332,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!1001 &835819625
+--- !u!1001 &829982283
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
