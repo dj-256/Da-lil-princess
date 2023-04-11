@@ -124,7 +124,6 @@ public class CarEffects : MonoBehaviour
         if (!carMovement || !leftWheel || !rightWheel)
         {
             // Can't play turn wheels effect
-            
             return;
         }
 
@@ -140,6 +139,6 @@ public class CarEffects : MonoBehaviour
             return;
         }
 
-        audioSource.pitch = engineSfxBasePitch + rg.velocity.magnitude * engineSfxVelocityPitchFactor;
+        audioSource.pitch = (engineSfxBasePitch + rg.velocity.magnitude * engineSfxVelocityPitchFactor)/10;
     }
 }

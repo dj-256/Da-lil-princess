@@ -5,6 +5,6 @@ using UnityEngine;
 
 public class CarIdentity : MonoBehaviour
 {
-    public string myname;
+    public string driverName;
     
 }
