@@ -5,6 +5,18 @@ using UnityEngine;
 public class PlaySound : MonoBehaviour
 {
     private bool playerInside = false;
+    
+    public AudioSource audioSource;
+    public AudioClip musicClip;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -19,6 +31,10 @@ public class PlaySound : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInside = false;
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
         }
     }
 
@@ -26,7 +42,27 @@ public class PlaySound : MonoBehaviour
     {
         if (playerInside && Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("player is inside");
+            ToggleMusic();
+        }
+    }
+    
+    void ToggleMusic()
+    {
+        if (musicClip != null)
+        {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+            else
+            {
+                audioSource.clip = musicClip;
+                audioSource.Play();
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Aucun AudioClip assigné. Veuillez assigner un AudioClip dans l'inspecteur.");
         }
     }
 
