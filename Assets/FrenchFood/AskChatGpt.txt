@@ -1,0 +1,20 @@
+I will give you a list of french dishes for each french region. You will answer by giving me a brief description of the dish in a few lines.
+For example, when I give you Aquitaine-Canard, you write this:
+
+Aquitaine:
+Canard
+Brief description of the canard dish (in english).
+
+Here is the dishes:
+Aquitaine-Canard
+AuvergneRhoneAlpes-TarteAuxPralines
+BourgogneFranchComte-BoeufBourgignon
+Bretagne-KouignAmann
+CentreValDeLoire-CoqAuVin
+Corse-Prisuttu
+GrandEst-Choucroute
+HautsDeFrance-Maroilles
+Normandie-TripesALaModeDeCaen
+Occitanie-Fougasse
+PACA-Bouillabaisse
+PaysDeLaLoire-GateauNantais
