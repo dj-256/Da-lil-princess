@@ -115,7 +115,7 @@ public class QuizManager : MonoBehaviour
             answerStyle.fontSize = 20;
             answerStyle.alignment = TextAnchor.MiddleLeft;
 
-            GUILayout.BeginArea(new Rect((Screen.width - 300) / 2, (Screen.height - 200) / 2, 300, 200));
+            GUILayout.BeginArea(new Rect((Screen.width - 500) / 2, (Screen.height - 300) / 2, 500, 300));
             GUILayout.Label(currentQuestion.questionText, questionStyle);
 
             for (int i = 0; i < currentQuestion.answers.Length; i++)
