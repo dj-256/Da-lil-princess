@@ -8,6 +8,8 @@ public class DishInfo : MonoBehaviour
     public string dishInformation = "Information about the dish";
     private bool playerInside = false;
     private bool showInformation = false;
+    
+    private bool isPauseMenuActive = false;
 
     void OnTriggerEnter(Collider other)
     {
@@ -28,6 +30,10 @@ public class DishInfo : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        { 
+            isPauseMenuActive = !isPauseMenuActive;
+        }
         if (playerInside && Input.GetKeyDown(KeyCode.E))
         {
             showInformation = !showInformation;
@@ -42,50 +48,54 @@ public class DishInfo : MonoBehaviour
 
     private void OnGUI()
     {
-        int fontSize = 22;
-        GUIStyle style = new GUIStyle(GUI.skin.label);
-        style.fontSize = fontSize;
-        style.alignment = TextAnchor.UpperCenter;
-
-        float labelWidth = 600;
-        float labelHeight = fontSize + 10;
-        float xPos = (Screen.width - labelWidth) / 2;
-        float yPos = Screen.height - 70;
-
-        if (playerInside && !showInformation)
+        if (!isPauseMenuActive)
         {
-            GUI.Label(new Rect(xPos, yPos, labelWidth, labelHeight), "Press E to open information about this dish", style);
-        }
+            int fontSize = 22;
+            GUIStyle style = new GUIStyle(GUI.skin.label);
+            style.fontSize = fontSize;
+            style.alignment = TextAnchor.UpperCenter;
 
-        if (showInformation)
-        {
-            DrawBlackBackground();
+            float labelWidth = 600;
+            float labelHeight = fontSize + 10;
+            float xPos = (Screen.width - labelWidth) / 2;
+            float yPos = Screen.height - 70;
 
-            GUIStyle titleStyle = new GUIStyle(GUI.skin.label);
-            titleStyle.fontSize = fontSize * 2;
-            titleStyle.alignment = TextAnchor.MiddleCenter;
-            titleStyle.normal.textColor = Color.white;
+            if (playerInside && !showInformation)
+            {
+                GUI.Label(new Rect(xPos, yPos, labelWidth, labelHeight), "Press E to open information about this dish",
+                    style);
+            }
 
-            yPos = 50; // Move the title closer to the top
-            GUI.Label(new Rect(xPos, yPos, labelWidth, fontSize * 2 + 10), dishTitle, titleStyle);
+            if (showInformation)
+            {
+                DrawBlackBackground();
 
-            style.normal.textColor = Color.white;
-            style.alignment = TextAnchor.UpperLeft;
-            style.wordWrap = true;
+                GUIStyle titleStyle = new GUIStyle(GUI.skin.label);
+                titleStyle.fontSize = fontSize * 2;
+                titleStyle.alignment = TextAnchor.MiddleCenter;
+                titleStyle.normal.textColor = Color.white;
 
-            yPos += fontSize * 2 + 30; // Adjust the yPos for the description box
+                yPos = 50; // Move the title closer to the top
+                GUI.Label(new Rect(xPos, yPos, labelWidth, fontSize * 2 + 10), dishTitle, titleStyle);
 
-            float boxWidth = labelWidth;
-            float boxHeight = Screen.height - yPos - 50;
-            Rect descriptionRect = new Rect(xPos, yPos, boxWidth, boxHeight);
+                style.normal.textColor = Color.white;
+                style.alignment = TextAnchor.UpperLeft;
+                style.wordWrap = true;
 
-            GUIStyle boxStyle = new GUIStyle(GUI.skin.box);
-            boxStyle.alignment = TextAnchor.UpperLeft;
-            boxStyle.fontSize = fontSize;
-            boxStyle.normal.textColor = Color.white;
-            boxStyle.wordWrap = true;
+                yPos += fontSize * 2 + 30; // Adjust the yPos for the description box
 
-            GUI.Box(descriptionRect, dishInformation, boxStyle);
+                float boxWidth = labelWidth;
+                float boxHeight = Screen.height - yPos - 50;
+                Rect descriptionRect = new Rect(xPos, yPos, boxWidth, boxHeight);
+
+                GUIStyle boxStyle = new GUIStyle(GUI.skin.box);
+                boxStyle.alignment = TextAnchor.UpperLeft;
+                boxStyle.fontSize = fontSize;
+                boxStyle.normal.textColor = Color.white;
+                boxStyle.wordWrap = true;
+
+                GUI.Box(descriptionRect, dishInformation, boxStyle);
+            }
         }
     }
 }

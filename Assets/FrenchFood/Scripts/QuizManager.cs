@@ -17,6 +17,8 @@ public class QuizManager : MonoBehaviour
     private bool quizFinished = false;
     private bool quizActive = false;
 
+    private bool isPauseMenuActive = false;
+
 	public void ExitQuiz()
 	{
 		currentQuestionIndex = 0;
@@ -38,6 +40,10 @@ public class QuizManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        { 
+            isPauseMenuActive = !isPauseMenuActive;
+        }
         if (quizActive && !quizFinished)
         {
             CheckForKeyPress();
@@ -46,17 +52,20 @@ public class QuizManager : MonoBehaviour
 
     private void OnGUI()
     {
-        if (quizActive)
+        if (!isPauseMenuActive)
         {
-            DrawBackgroundOverlay();
-            DisplayQuizTitle();
-            if (!quizFinished)
+            if (quizActive)
             {
-                DisplayCurrentQuestion();
-            }
-            else
-            {
-                DisplayQuizResults();
+                DrawBackgroundOverlay();
+                DisplayQuizTitle();
+                if (!quizFinished)
+                {
+                    DisplayCurrentQuestion();
+                }
+                else
+                {
+                    DisplayQuizResults();
+                }
             }
         }
     }
