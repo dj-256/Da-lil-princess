@@ -2512,8 +2512,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aa0cc267e325cb40b9370fcb31ea5a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 347968670}
-  marginFromPlayer: {x: 0, y: 10, z: -8}
+  target: {fileID: 347968670}
+  smoothSpeed: 0.3
+  locationOffset: {x: 0, y: 5, z: -10}
+  rotationOffset: {x: 10, y: 0, z: 0}
 --- !u!1001 &3601381505778481154
 PrefabInstance:
   m_ObjectHideFlags: 0
