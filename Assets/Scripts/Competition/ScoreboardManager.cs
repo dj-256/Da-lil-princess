@@ -11,7 +11,7 @@ public class ScoreboardManager : MonoBehaviour
     void Start()
     {
         scoreText.text = "You collected "+LapManager.score.ToString()+" coins";
-        timeText.text = "Your time was "+LapManager.finalTime;
+        timeText.text = "Your time : "+LapManager.finalTime;
     }
 
     // Update is called once per frame
