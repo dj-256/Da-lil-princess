@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour
 {
     public TextMeshProUGUI lapText;
     public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI winnerText;
+    //public TextMeshProUGUI winnerText;
     
     // Start is called before the first frame update
     void Start()
@@ -31,8 +31,8 @@ public class UIManager : MonoBehaviour
         scoreText.text = message;
     }
 
-    public void UpdateWinnerText(string message)
+    /*public void UpdateWinnerText(string message)
     {
         winnerText.text = message;
-    }
+    }*/
 }

@@ -27,7 +27,7 @@ public class LapManager : MonoBehaviour
         ListenCheckpoints(true);
         ListenCoins(true);
         ui.UpdateLapText("Lap "+ playerRanks[0].lapNumber + " / " + totalLaps);
-        ui.UpdateScoreText("Score: " + score);
+        ui.UpdateScoreText("Coins : " + score);
         startTime = System.DateTime.Now;
         mainPlayerRank = playerRanks.Find(player => player.identity.gameObject.tag == "Player");
     }
@@ -73,11 +73,11 @@ public class LapManager : MonoBehaviour
                     // if first winner, display its name
                     if (player.rank == 1)
                     {
-                        ui.UpdateWinnerText(player.identity.driverName + " won");
+                        //ui.UpdateWinnerText(player.identity.driverName + " won");
                     }
                     else if (player == mainPlayerRank) // display player rank if not winner
                     {
-                        ui.UpdateWinnerText("\nYou finished in " + mainPlayerRank.rank + " place");
+                        //ui.UpdateWinnerText("\nYou finished in " + mainPlayerRank.rank + " place");
                     }
 
                     if (player == mainPlayerRank) onPlayerFinished.Invoke();
@@ -110,7 +110,7 @@ public class LapManager : MonoBehaviour
         PlayerRank player = playerRanks.Find((rank) => rank.identity == car);
         if (coins.Contains(coin) && player.identity.driverName=="Princess") {
             score += 1;
-            ui.UpdateScoreText("Score: " + score);
+            ui.UpdateScoreText("Coins : " + score);
         }
     }
     

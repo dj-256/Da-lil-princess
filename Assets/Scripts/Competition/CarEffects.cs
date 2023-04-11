@@ -72,7 +72,7 @@ public class CarEffects : MonoBehaviour
         audioSource.pitch = Random.Range(0.85f, 1f);
         // the more the collisison is big, the more the sound velocity
         float volumeScale = (collision.relativeVelocity.magnitude / divide) - minus;
-        //audioSource.PlayOneShot(collisionSfxs[Random.Range(0, collisionSfxs.Length - 1)], volumeScale);
+        audioSource.PlayOneShot(collisionSfxs[Random.Range(0, collisionSfxs.Length - 1)], volumeScale);
     }
 
     private void UpdateBrakeLightEffect()
@@ -124,7 +124,6 @@ public class CarEffects : MonoBehaviour
         if (!carMovement || !leftWheel || !rightWheel)
         {
             // Can't play turn wheels effect
-            
             return;
         }
 
@@ -140,6 +139,6 @@ public class CarEffects : MonoBehaviour
             return;
         }
 
-        audioSource.pitch = engineSfxBasePitch + rg.velocity.magnitude * engineSfxVelocityPitchFactor;
+        audioSource.pitch = (engineSfxBasePitch + rg.velocity.magnitude * engineSfxVelocityPitchFactor)/10;
     }
 }
