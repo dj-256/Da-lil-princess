@@ -47,6 +47,7 @@ ExportedObj/
 *.pidb.meta
 *.pdb.meta
 *.mdb.meta
+*.unitypackage.meta
 
 # Unity3D generated file on crash reports
 sysinfo.txt
@@ -59,4 +60,4 @@ sysinfo.txt
 crashlytics-build.properties
 
 UserSettings/EditorUserSettings.asset
-Assets/SyntyStudios/PolygonStarter/PolygonPrototype/URP_ExtractMe.unitypackage.meta
+*.dwlt
