@@ -181,7 +181,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Play again
+  m_text: Press Enter to play again
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 71e47e1cfba1d0e4a8a99ac4e4820b06, type: 2}
   m_sharedMaterial: {fileID: -5966236767680409105, guid: 71e47e1cfba1d0e4a8a99ac4e4820b06, type: 2}
